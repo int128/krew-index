@@ -1,0 +1,47 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: auth-proxy
+spec:
+  homepage: https://github.com/int128/kauthproxy
+  shortDescription: Forward a local port to a pod or service via authentication proxy
+  description: |
+    This is a kubectl plugin to forward a local port to a pod or service via authentication proxy.
+    It gets a token from the credential plugin and injects the token to the Authorization header of proxy requests.
+
+  caveats: |
+    You need to configure authentication in the kubeconfig.
+    See https://github.com/int128/kauthproxy for more.
+
+  version: v0.2.0
+  platforms:
+    - uri: https://github.com/int128/kauthproxy/releases/download/v0.2.0/kauthproxy_linux_amd64.zip
+      sha256: "cae50e9e6a468a2cba2e0f8a0ea3d5fe9f474d01408843f915e223e043a377d1"
+      bin: kauthproxy
+      files:
+        - from: "kauthproxy"
+          to: "."
+      selector:
+        matchLabels:
+          os: linux
+          arch: amd64
+    - uri: https://github.com/int128/kauthproxy/releases/download/v0.2.0/kauthproxy_darwin_amd64.zip
+      sha256: "47e19dc3e8764e9439f3d496f952de6d49343f183cea5e75ee59ede0a783fdd6"
+      bin: kauthproxy
+      files:
+        - from: "kauthproxy"
+          to: "."
+      selector:
+        matchLabels:
+          os: darwin
+          arch: amd64
+    - uri: https://github.com/int128/kauthproxy/releases/download/v0.2.0/kauthproxy_windows_amd64.zip
+      sha256: "22154d87159e2b7181803f2e3a5c814bd2e31a6ed392c6105e5658ee85293f00"
+      bin: kauthproxy.exe
+      files:
+        - from: "kauthproxy.exe"
+          to: "."
+      selector:
+        matchLabels:
+          os: windows
+          arch: amd64
